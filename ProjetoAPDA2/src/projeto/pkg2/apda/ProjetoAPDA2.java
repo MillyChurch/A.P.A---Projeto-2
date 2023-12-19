@@ -8,6 +8,42 @@ import java.util.Scanner;
 
 public class ProjetoAPDA2 {
 
+    public static int encontarMenorValor(ArrayList<Times> tabelaDeTimes, int indiceAtual, int fimDoVetor){
+        
+        if( indiceAtual == fimDoVetor ){
+            return indiceAtual;
+        }
+
+        int result = encontarMenorValor(tabelaDeTimes, indiceAtual + 1, fimDoVetor);
+        
+        if( (tabelaDeTimes.get(indiceAtual).pontos) < (tabelaDeTimes.get(result).pontos)  ){
+            result = indiceAtual;
+        }   
+        return result;
+  
+    }
+
+    
+    public static void selectionSort(ArrayList<Times> tabelaDeTimes, int start, int size){
+    
+        if(size == start){
+            return;
+        }
+        
+        int menorValor = encontarMenorValor(tabelaDeTimes, start, size-1);
+        
+        if(menorValor != start){
+            Collections.swap(tabelaDeTimes, menorValor, start);
+        }
+        
+        selectionSort(tabelaDeTimes, start+1, size);
+    }
+    
+    public static void insertionSort(ArrayList<Times> tabelaDeTimes){
+    
+        
+    }
+    
     public static void carregarTimes(ArrayList<Times> tabelaDeTimes){
 
         
@@ -23,19 +59,9 @@ public class ProjetoAPDA2 {
                 Times time = new Times(arrayDeStrings[0], Integer.parseInt(arrayDeStrings[1]));
                 tabelaDeTimes.add(time);
              }
-            
-            if(tabelaDeTimes.size() > 1 ){
-                
-                for(int i = 0; i<tabelaDeTimes.size(); i++){
-                    
-                    for(int j = i+1 ; j < tabelaDeTimes.size(); j++ ){
-
-                         if (tabelaDeTimes.get(i).pontos < tabelaDeTimes.get(j).pontos){
-                               Collections.swap(tabelaDeTimes, i, j); 
-                          } 
-                    }    
-                }   
-            }  
+                   
+               selectionSort(tabelaDeTimes, 0, tabelaDeTimes.size());
+               
         }
         
         catch(FileNotFoundException e) {
@@ -121,6 +147,10 @@ public class ProjetoAPDA2 {
         ArrayList<Times> times = new ArrayList();
         carregarTimes(times); 
         int pontosBuscados = 62;
+        
+        for(int i =0;i<times.size();i++){
+            System.out.println(times.get(i).nome + " " + times.get(i).pontos);
+        }
         
         procurarPorPontos(times, pontosBuscados, 0);System.out.println("\n");
         cincoPrimeiros(times, 0);System.out.println("\n");
