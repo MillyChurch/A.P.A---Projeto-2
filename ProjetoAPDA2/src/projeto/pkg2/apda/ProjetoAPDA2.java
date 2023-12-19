@@ -8,40 +8,16 @@ import java.util.Scanner;
 
 public class ProjetoAPDA2 {
 
-    public static int encontarMenorValor(ArrayList<Times> tabelaDeTimes, int indiceAtual, int fimDoVetor){
-        
-        if( indiceAtual == fimDoVetor ){
-            return indiceAtual;
-        }
 
-        int result = encontarMenorValor(tabelaDeTimes, indiceAtual + 1, fimDoVetor);
-        
-        if( (tabelaDeTimes.get(indiceAtual).pontos) < (tabelaDeTimes.get(result).pontos)  ){
-            result = indiceAtual;
-        }   
-        return result;
-  
-    }
-
+    public static void bubbleSort (ArrayList<Times> tabelaDeTimes){
     
-    public static void selectionSort(ArrayList<Times> tabelaDeTimes, int start, int size){
-    
-        if(size == start){
-            return;
+        for(int i = 0; i < tabelaDeTimes.size(); i++){
+            for(int j = 0; j < tabelaDeTimes.size() - 1 - i; j++){
+                if(tabelaDeTimes.get(j).pontos < tabelaDeTimes.get(j+1).pontos){
+                   Collections.swap(tabelaDeTimes, j, j+1);
+                }
+            }
         }
-        
-        int menorValor = encontarMenorValor(tabelaDeTimes, start, size-1);
-        
-        if(menorValor != start){
-            Collections.swap(tabelaDeTimes, menorValor, start);
-        }
-        
-        selectionSort(tabelaDeTimes, start+1, size);
-    }
-    
-    public static void insertionSort(ArrayList<Times> tabelaDeTimes){
-    
-        
     }
     
     public static void carregarTimes(ArrayList<Times> tabelaDeTimes){
@@ -60,7 +36,7 @@ public class ProjetoAPDA2 {
                 tabelaDeTimes.add(time);
              }
                    
-               selectionSort(tabelaDeTimes, 0, tabelaDeTimes.size());
+               bubbleSort(tabelaDeTimes);
                
         }
         
