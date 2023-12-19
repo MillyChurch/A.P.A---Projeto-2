@@ -8,20 +8,35 @@ import java.util.Scanner;
 
 public class ProjetoAPDA2 {
 
+    public static int encontarMenorValor(ArrayList<Times> tabelaDeTimes, int indiceAtual, int fimDoVetor){
+        
+        if( indiceAtual == fimDoVetor ){
+            return indiceAtual;
+        }
 
-    public static void insertionSort(ArrayList<Times> tabelaDeTimes, int inicioArray,   int tamanhoDoArray){
+        int result = encontarMenorValor(tabelaDeTimes, indiceAtual + 1, fimDoVetor);
+        
+        if( (tabelaDeTimes.get(indiceAtual).pontos) > (tabelaDeTimes.get(result).pontos)  ){
+            result = indiceAtual;
+        }   
+        return result;
+  
+    }
+
     
-        if(tamanhoDoArray == inicioArray){
+    public static void selectionSort(ArrayList<Times> tabelaDeTimes, int start, int size){
+    
+        if(size == start){
             return;
         }
-
-        int j = inicioArray;
-        while(j > 0 && tabelaDeTimes.get(j-1).pontos    > tabelaDeTimes.get(j).pontos){
-            Collections.swap(tabelaDeTimes, j, j-1);
-            j--;
+        
+        int menorValor = encontarMenorValor(tabelaDeTimes, start, size-1);
+        
+        if(menorValor != start){
+            Collections.swap(tabelaDeTimes, menorValor, start);
         }
         
-        insertionSort(tabelaDeTimes, inicioArray+1, tamanhoDoArray);
+        selectionSort(tabelaDeTimes, start+1, size);
     }
     
     public static void insertionSort(ArrayList<Times> tabelaDeTimes){
@@ -45,7 +60,7 @@ public class ProjetoAPDA2 {
                 tabelaDeTimes.add(time);
              }
                    
-               insertionSort(tabelaDeTimes, 0, tabelaDeTimes.size());
+               selectionSort(tabelaDeTimes, 0, tabelaDeTimes.size());
                
         }
         
@@ -137,7 +152,7 @@ public class ProjetoAPDA2 {
             System.out.println(times.get(i).nome + " " + times.get(i).pontos);
         }
         
-        procurarPorPontos(times, pontosBuscados, 0);System.out.println("\n");
+        System.out.println("\n");procurarPorPontos(times, pontosBuscados, 0);System.out.println("\n");
         cincoPrimeiros(times, 0);System.out.println("\n");
         cincoUltimos(times, 0);System.out.println("\n");
         diferenciacaoCincoPrimeiros(times, 0);System.out.println("\n");
