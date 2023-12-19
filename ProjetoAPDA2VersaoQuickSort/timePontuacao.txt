@@ -1,0 +1,20 @@
+Goias;35
+Coritiba;29
+Flamengo;63
+Botafogo;62
+Atletico MG;60
+Gremio;59
+Sao Paulo;47
+Red Bull Bragantino;59
+Fluminense;53
+Athletico;52
+Cuiaba;48
+Internacional;46
+Fortaleza;45
+Cruzeiro;44
+Corinthians;44
+Santos;43
+Vasco;42
+Bahia;41
+America-MG;21
+Palmeiras;63
